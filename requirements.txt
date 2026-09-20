@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+joblib
+fastapi
+uvicorn
+pydantic
+mlflow
+dvc
+pytest
+pytest-cov
+prometheus-fastapi-instrumentator
