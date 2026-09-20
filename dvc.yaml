@@ -1,2 +1,1 @@
-stages:
-  # Training pipeline stages will be added in the next implementation phase.
+stages: {}
