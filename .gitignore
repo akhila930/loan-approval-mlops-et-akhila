@@ -11,9 +11,12 @@ htmlcov/
 mlruns/
 .DS_Store
 *.log
-dvc.yaml
+
+data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+
 models/*
 !models/.gitkeep
+models/*.joblib
