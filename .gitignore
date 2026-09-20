@@ -11,7 +11,7 @@ htmlcov/
 mlruns/
 .DS_Store
 *.log
-data/raw/*
+dvc.yaml
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
