@@ -2,24 +2,21 @@ name: Loan Approval MLOps CI
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
 
   test:
-    name: Run Pytest
+    name: Test and Train
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -29,16 +26,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Pytest
+      - name: Run DVC pipeline
+        run: |
+          dvc repro
+
+      - name: Run tests
         run: |
           pytest -v
 
-      - name: Run Pytest with coverage
+      - name: Run coverage
         run: |
-          pytest -v \
-            --cov=src \
-            --cov=app \
-            --cov-report=term-missing
+          pytest -v --cov=src --cov=app --cov-report=term-missing
 
   docker:
     name: Build Docker Image
@@ -46,11 +44,10 @@ jobs:
     needs: test
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.10"
@@ -62,8 +59,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build \
-            -t loan-approval-mlops:ci .
+          docker build -t loan-approval-mlops:ci .
 
       - name: Verify Docker image
         run: |
