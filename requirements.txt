@@ -10,4 +10,4 @@ dvc
 pytest
 pytest-cov
 prometheus-fastapi-instrumentator
-httpx2
+httpx

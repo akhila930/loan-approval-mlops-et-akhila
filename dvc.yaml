@@ -1,1 +1,18 @@
-stages: {}
+stages:
+
+  validate:
+    cmd: python3 -m src.validation.validate
+    deps:
+      - data/raw/loan_data.csv
+      - src/validation/validate.py
+
+  train:
+    cmd: python3 -m src.training.train
+    deps:
+      - data/raw/loan_data.csv
+      - src/training/train.py
+    outs:
+      - models/loan_approval_model.joblib
+      - models/logistic_regression.joblib
+      - models/random_forest.joblib
+      - models/preprocessor.joblib

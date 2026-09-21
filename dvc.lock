@@ -1,0 +1,41 @@
+schema: '2.0'
+stages:
+  validate:
+    cmd: python3 -m src.validation.validate
+    deps:
+    - path: data/raw/loan_data.csv
+      hash: md5
+      md5: a4f2b37cfb30fe0fcff484c1d548022f
+      size: 427429
+    - path: src/validation/validate.py
+      hash: md5
+      md5: 068d63529dc455af9cf8aab2d3e89095
+      size: 5227
+  train:
+    cmd: python3 -m src.training.train
+    deps:
+    - path: data/raw/loan_data.csv
+      hash: md5
+      md5: a4f2b37cfb30fe0fcff484c1d548022f
+      size: 427429
+    - path: src/training/train.py
+      hash: md5
+      md5: da90c46f94014c70745b6015d4f659d4
+      size: 15110
+    outs:
+    - path: models/loan_approval_model.joblib
+      hash: md5
+      md5: 63178db5d2e78165200096e5fe290941
+      size: 1023
+    - path: models/logistic_regression.joblib
+      hash: md5
+      md5: 63178db5d2e78165200096e5fe290941
+      size: 1023
+    - path: models/preprocessor.joblib
+      hash: md5
+      md5: 8d3347559dc9e8a57d1395caf5311b0b
+      size: 4871
+    - path: models/random_forest.joblib
+      hash: md5
+      md5: 0f2411a04f0a8b686a2f0b7cebd5a0ca
+      size: 2546569
