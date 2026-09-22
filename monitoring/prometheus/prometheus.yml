@@ -1,1 +1,9 @@
-# Prometheus configuration will be implemented in the monitoring phase.
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "loan-approval-api"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "loan-approval-service:8000"
