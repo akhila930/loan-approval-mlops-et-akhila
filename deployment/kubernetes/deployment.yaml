@@ -1,1 +1,42 @@
+
 # Kubernetes Deployment will be implemented in the deployment phase.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loan-approval-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: loan-approval-api
+  template:
+    metadata:
+      labels:
+        app: loan-approval-api
+    spec:
+      containers:
+        - name: loan-approval-api
+          image: loan-approval-mlops:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
