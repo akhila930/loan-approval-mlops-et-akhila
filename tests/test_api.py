@@ -11,16 +11,12 @@ client = TestClient(app)
 
 
 def test_root_endpoint():
-    """Test the root endpoint."""
-
+    """Test that the root endpoint serves the frontend."""
     response = client.get("/")
 
     assert response.status_code == 200
-
-    data = response.json()
-
-    assert data["service"] == "Loan Approval Prediction API"
-    assert data["status"] == "running"
+    assert "text/html" in response.headers["content-type"]
+    assert "Loan Approval Prediction" in response.text
 
 
 def test_health_endpoint():

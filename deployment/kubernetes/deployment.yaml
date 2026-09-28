@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: loan-approval-api
-          image: loan-approval-mlops:1.0
+          image: loan-approval-mlops:2.0
           imagePullPolicy: Never
           ports:
             - containerPort: 8000
